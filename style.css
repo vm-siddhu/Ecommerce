@@ -1,0 +1,22 @@
+
+#products{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+#products div {
+    padding: 0px 10px;
+    border: 2px solid black;
+    width: 30%;
+}
+.nav{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#search{
+    width: 250px;
+    height: 20px;
+    padding: 10px;
+}
