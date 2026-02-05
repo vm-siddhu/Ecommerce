@@ -1,15 +1,19 @@
-let container = document.getElementById('products')
+let url = new URLSearchParams(window.location.search)
+let searchvalue = url.get('q')
+console.log(searchvalue)
 
-let data
-async function fetchingData() {
-    await fetch('https://dummyjson.com/products').then((resp) => resp.json()).then((a) => {
-        data = a.products
-        renderproducts(data)
+fetch('https://dummyjson.com/products').then(res => res.json()).then(data => {
+    data = data.products
+
+    let filteredproducts = data.filter((product) => {
+        return product.title.toLowerCase().includes(searchvalue)
     })
-}
 
-fetchingData()
+    renderproducts(filteredproducts)
+})
 
+
+let container = document.getElementById('products')
 function renderproducts(products) {
     container.innerHTML = ''
     products.forEach((product) => {
@@ -38,15 +42,3 @@ function renderproducts(products) {
         container.append(div)
     });
 }
-
-
-
-
-document.getElementById('submit').addEventListener('click', (e) => {
-    e.preventDefault()
-    let searchvalue = document.getElementById('search').value.toLowerCase()
-
-
-    window.location.href = `search.html?q=${searchvalue}`
-})
-
